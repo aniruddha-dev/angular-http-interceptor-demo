@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -12,6 +12,7 @@ import { LoggingInterceptor  } from './shared/interceptors/logging.interceptor'
 import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
 import { CustomInterceptor } from './shared/interceptors/custom.interceptor';
+import { LoaderInterceptor } from './shared/interceptors/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,9 @@ import { CustomInterceptor } from './shared/interceptors/custom.interceptor';
     },
     {
       provide: HTTP_INTERCEPTORS, useClass: CustomInterceptor, multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true
     }
   ],
   bootstrap: [AppComponent]
